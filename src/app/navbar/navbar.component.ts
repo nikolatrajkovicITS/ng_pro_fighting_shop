@@ -1,6 +1,5 @@
+import { AuthService } from '../auth.service';
 import { Component } from '@angular/core';
-import { AngularFireAuth } from 'angularfire2/auth';
-import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-navbar',
@@ -8,14 +7,11 @@ import * as firebase from 'firebase';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
-  user: firebase.User;
-
-  constructor(private afAuth: AngularFireAuth) {
+  constructor(public authService: AuthService) {    
   }
 
   logout() {
-    this.afAuth.auth.signOut();
+    this.authService.logout();
   }
-
 }
 
