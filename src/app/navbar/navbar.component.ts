@@ -1,3 +1,4 @@
+import { AppUser } from '../models/app-user';
 import { AuthService } from '../auth.service';
 import { Component } from '@angular/core';
 
@@ -7,7 +8,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
-  constructor(public authService: AuthService) {    
+  appUser: AppUser;
+  
+  constructor(private authService: AuthService) {    
+    authService.appUser$.subscribe(appUser => this.appUser = appUser);    // We don't need to unsubscribe here, cus we have a single instance of this navbar component in the DOM.
   }
 
   logout() {
