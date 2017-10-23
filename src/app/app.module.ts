@@ -1,5 +1,6 @@
-import { AdminAuthGuardService } from './admin-auth-guard.service';
-import { AuthGuardService } from './auth-guard.service';
+import { CategoryService } from './category.service';
+import { AdminAuthGuard } from './admin-auth-guard.service';
+import { AuthGuard } from './auth-guard.service';
 import { AuthService } from './auth.service';
 import { RouterModule } from '@angular/router';
 import { environment } from '../environments/environment';
@@ -22,6 +23,7 @@ import { AdminProductsComponent } from './admin/admin-products/admin-products.co
 import { AdminOrdersComponent } from './admin-orders/admin-orders.component';
 import { LoginComponent } from './login/login.component';
 import { UserService } from './user.service';
+import { ProductFormComponent } from './admin/product-form/product-form.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,8 @@ import { UserService } from './user.service';
     MyOrdersComponent,
     AdminProductsComponent,
     AdminOrdersComponent,
-    LoginComponent
+    LoginComponent,
+    ProductFormComponent
   ],
   imports: [
     BrowserModule,
@@ -52,15 +55,18 @@ import { UserService } from './user.service';
       { path: 'my/orders', component: MyOrdersComponent },
       { path: 'login', component: LoginComponent },
       
-      { path: 'admin/products', component: AdminProductsComponent, canActivate: [AuthGuardService, AdminAuthGuardService] },
-      { path: 'admin/orders', component: AdminOrdersComponent, canActivate: [AuthGuardService, AdminAuthGuardService] } // if the user is logged in then second authguard is executed to make sure the user is an admin user. 
+      { path: 'admin/products', component: AdminProductsComponent, canActivate: [AuthGuard, AdminAuthGuard] },
+      { path: 'admin/products/new', component: ProductFormComponent, canActivate: [AuthGuard, AdminAuthGuard] },
+      { path: 'admin/orders', component: AdminOrdersComponent, canActivate: [AuthGuard, AdminAuthGuard] }  // if the user is logged in then second authguard is executed to make sure the user is an admin user. 
+      
     ])
   ],
   providers: [
     AuthService,
-    AuthGuardService,
+    AuthGuard,
     UserService,
-    AdminAuthGuardService
+    AdminAuthGuard,
+    CategoryService
   ],
   bootstrap: [AppComponent]
 })

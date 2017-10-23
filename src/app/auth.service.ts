@@ -33,15 +33,10 @@ export class AuthService {
     this.router.navigate(['/']);
   }
 
-  // get appUser$(): Observable<AppUser> {
-  //   return this.user$                                         // It's a firebase user object, This user object is the user that is represented by firebase as part of authenitcation, it's not a user object that we stoe in our db.
-  //   .switchMap(user => this.userService.get(user.uid))        // switchMap mapping as the name implies, But it also switches to to this new observable: "in next line"
-  // }
-
   get appUser$() : Observable<AppUser> {
-    return this.user$
+    return this.user$                                           // It's a firebase user object, This user object is the user that is represented by firebase as part of authenitcation, it's not a user object that we stoe in our db.
       .switchMap(user => {
-        if (user) return this.userService.get(user.uid);
+        if (user) return this.userService.get(user.uid);        // switchMap mapping as the name implies, But it also switches to to this new observable: "in next line"
 
         return Observable.of(null);
       });   

@@ -7,7 +7,7 @@ import 'rxjs/add/operator/map';
 
 
 @Injectable()
-export class AdminAuthGuardService implements CanActivate {
+export class AdminAuthGuard implements CanActivate {
 
   constructor(private authService: AuthService, private userService: UserService) { }
 
