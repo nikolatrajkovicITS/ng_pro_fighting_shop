@@ -60,10 +60,25 @@ import { ProductFormComponent } from './admin/product-form/product-form.componen
       { path: 'my/orders', component: MyOrdersComponent },
       { path: 'login', component: LoginComponent },
       
-      { path: 'admin/products', component: AdminProductsComponent, canActivate: [AuthGuard, AdminAuthGuard] },
-      { path: 'admin/products/new', component: ProductFormComponent, canActivate: [AuthGuard, AdminAuthGuard] },
-      { path: 'admin/orders', component: AdminOrdersComponent, canActivate: [AuthGuard, AdminAuthGuard] }  // if the user is logged in then second authguard is executed to make sure the user is an admin user. 
-      
+      { 
+        path: 'admin/products/new', 
+        component: ProductFormComponent, 
+        canActivate: [AuthGuard, AdminAuthGuard] 
+      },
+      { 
+        path: 'admin/products/:id', 
+        component: ProductFormComponent, 
+        canActivate: [AuthGuard, AdminAuthGuard] 
+      },
+      { path: 'admin/products', 
+        component: AdminProductsComponent, 
+        canActivate: [AuthGuard, AdminAuthGuard] 
+      },
+      { 
+        path: 'admin/orders', 
+        component: AdminOrdersComponent, 
+        canActivate: [AuthGuard, AdminAuthGuard]            // if the user is logged in then second authguard is executed to make sure the user is an admin user. 
+      }  
     ])
   ],
   providers: [
