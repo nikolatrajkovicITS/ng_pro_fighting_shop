@@ -13,13 +13,11 @@ import 'rxjs/add/operator/switchMap';
 export class ProductsComponent {
   products: Product[] = [];                    // It's good practice to initialize array 
   filteredProducts: Product[] = [];
-  categories$;
   category: string;
 
   constructor(
     private route: ActivatedRoute,                                       // We can read route parameters
-    private productService: ProductService, 
-    private categoryService: CategoryService) {
+    private productService: ProductService) {
 
     productService
      .getAll()
@@ -35,7 +33,6 @@ export class ProductsComponent {
           this.products;                                                    // : (otherwise) if you don't have category, we want return all products.
         }); 
 
-    this.categories$ = categoryService.getAll();
   }
 
 }
