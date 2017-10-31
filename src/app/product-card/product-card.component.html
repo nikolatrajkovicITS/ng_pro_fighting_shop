@@ -1,8 +1,14 @@
-<div *ngIf="product.title" class="card mb-3" style="width: 20rem;">       <!-- We want to render this product card here, only if we have product.title -->
+<div *ngIf="product.title" class="card" >       <!-- We want to render this product card here, only if we have product.title -->
   <img *ngIf="product.imageUrl" class="card-img-top" [src]="product.imageUrl" alt="{{ product.title }}">
   <div class="card-body">
     <h4 class="card-title">{{ product.title }}</h4>
     <p class="card-text">{{ product.price | currency:'USD':true }}</p>
-    <a *ngIf="showActions"  href="#" class="btn btn-primary">Add to Cart</a>
+  </div>
+  <div class="card-footer">
+    <button
+      *ngIf="showActions" 
+      (click)="addToCart(product)"
+      class="btn btn-primary 
+      btn-block">Add to Cart</button>
   </div>
 </div>

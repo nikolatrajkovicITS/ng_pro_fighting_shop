@@ -1,3 +1,4 @@
+import { ShoppingCartService } from './shopping-cart.service';
 import { ProductService } from './product.service';
 import { CategoryService } from './category.service';
 import { AdminAuthGuard } from './admin-auth-guard.service';
@@ -55,17 +56,18 @@ import { ProductCardComponent } from './product-card/product-card.component';
     DataTableModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
-    NgbModule.forRoot(),
     AngularFireAuthModule,
+    NgbModule.forRoot(),
     RouterModule.forRoot([
       { path: '', component: ProductsComponent },
       { path: 'products', component: ProductsComponent },
       { path: 'shopping-cart', component: ShoppingCartComponent },
-      { path: 'check-out', component: CheckOutComponent },
-      { path: 'order-success', component: OrderSuccessComponent },
-      { path: 'my/orders', component: MyOrdersComponent },
       { path: 'login', component: LoginComponent },
-      
+
+      { path: 'check-out', component: CheckOutComponent, canActivate: [AuthGuard] },
+      { path: 'order-success', component: OrderSuccessComponent, canActivate: [AuthGuard] },
+      { path: 'my/orders', component: MyOrdersComponent, canActivate: [AuthGuard] },
+     
       { 
         path: 'admin/products/new', 
         component: ProductFormComponent, 
@@ -76,24 +78,26 @@ import { ProductCardComponent } from './product-card/product-card.component';
         component: ProductFormComponent, 
         canActivate: [AuthGuard, AdminAuthGuard] 
       },
-      { path: 'admin/products', 
+      { 
+        path: 'admin/products', 
         component: AdminProductsComponent, 
         canActivate: [AuthGuard, AdminAuthGuard] 
       },
       { 
         path: 'admin/orders', 
         component: AdminOrdersComponent, 
-        canActivate: [AuthGuard, AdminAuthGuard]            // if the user is logged in then second authguard is executed to make sure the user is an admin user. 
-      }  
-    ])
+        canActivate: [AuthGuard, AdminAuthGuard] 
+      }
+    ])    
   ],
   providers: [
     AuthService,
     AuthGuard,
-    UserService,
     AdminAuthGuard,
+    UserService,
     CategoryService,
-    ProductService
+    ProductService,
+    ShoppingCartService
   ],
   bootstrap: [AppComponent]
 })
