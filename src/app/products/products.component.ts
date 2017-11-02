@@ -1,13 +1,11 @@
-import { Subscription } from 'rxjs/Subscription';
-import { CategoryService } from '../category.service';
-import { Component, OnDestroy, OnInit, Input } from '@angular/core';
-import { ProductService } from '../product.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Product } from '../models/product';
+import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/switchMap';
+
+import { Product } from '../models/product';
+import { ProductService } from '../product.service';
 import { ShoppingCartService } from '../shopping-cart.service';
-import { async } from '@angular/core/testing';
-import { ProductCardComponent } from '../product-card/product-card.component';
 
 @Component({
   selector: 'app-products',
@@ -22,8 +20,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
   subscription: Subscription;
 
   constructor(
-    private route: ActivatedRoute,                                       // We can read route parameters
-    private productService: ProductService,
+    route: ActivatedRoute,                                       // We can read route parameters
+    productService: ProductService,
     private shoppingCartService: ShoppingCartService
   ) {
     productService
