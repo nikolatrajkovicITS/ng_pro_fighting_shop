@@ -1,17 +1,28 @@
 import { AppUser } from '../models/app-user';
 import { AuthService } from '../auth.service';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ShoppingCartService } from '../shopping-cart.service';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
   appUser: AppUser;
+  shoppingCartItemCount: number;
   
-  constructor(private authService: AuthService) {    
-    authService.appUser$.subscribe(appUser => this.appUser = appUser);    // We don't need to unsubscribe here, cus we have a single instance of this navbar component in the DOM.
+  constructor(private authService: AuthService, private shoppingCartService: ShoppingCartService) {   }
+
+  async ngOnInit() {
+    this.authService.appUser$.subscribe(appUser => this.appUser = appUser);    // We don't need to unsubscribe here, cus we have a single instance of this navbar component in the DOM.
+    
+    let cart$ = await this.shoppingCartService.getCart();
+    cart$.subscribe(cart => {
+      this.shoppingCartItemCount = 0;
+      for (let productId in cart.items) 
+        this.shoppingCartItemCount += cart.items[productId].quantity;
+    });
   }
 
   logout() {
