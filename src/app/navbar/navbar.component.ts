@@ -1,7 +1,9 @@
+import { Observable } from 'rxjs/Rx';
 import { AppUser } from '../models/app-user';
 import { AuthService } from '../auth.service';
 import { Component, OnInit } from '@angular/core';
 import { ShoppingCartService } from '../shopping-cart.service';
+import { ShoppingCart } from '../models/shopping-cart';
 
 @Component({
   selector: 'app-navbar',
@@ -10,19 +12,13 @@ import { ShoppingCartService } from '../shopping-cart.service';
 })
 export class NavbarComponent implements OnInit {
   appUser: AppUser;
-  shoppingCartItemCount: number;
+  cart$: Observable<ShoppingCart>;
   
   constructor(private authService: AuthService, private shoppingCartService: ShoppingCartService) {   }
 
   async ngOnInit() {
-    this.authService.appUser$.subscribe(appUser => this.appUser = appUser);    // We don't need to unsubscribe here, cus we have a single instance of this navbar component in the DOM.
-    
-    let cart$ = await this.shoppingCartService.getCart();
-    cart$.subscribe(cart => {
-      this.shoppingCartItemCount = 0;
-      for (let productId in cart.items) 
-        this.shoppingCartItemCount += cart.items[productId].quantity;
-    });
+    this.authService.appUser$.subscribe(appUser => this.appUser = appUser);    // We don't need to unsubscribe here, cus we have a single instance of this navbar component in the DOM.  
+    this.cart$ = await this.shoppingCartService.getCart();
   }
 
   logout() {
