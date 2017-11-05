@@ -1,5 +1,5 @@
 <h1>Shopping Cart</h1>
-<ng-container *ngIf="cart$ | async as cart">  <!-- Cart$(OBrv) unwraped and store result in cart -->
+<ng-container *ngIf="cart$ | async as cart">   <!-- Cart$(Obrv) unwraped and store result in cart -->
   <p>
     You have {{ cart.totalItemsCount }} items in your shopping cart. 
   </p>
@@ -8,19 +8,28 @@
       <tr>
         <th>Product</th>
         <th>Quantity</th>
-        <th></th>
+        <th>Price</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of cart.items" >
+      <tr *ngFor="let item of cart.items" >   <!-- items which we iterating here are simple objects that we get from Firebase -->
         <td>
           {{ item.product.title }}
         </td>
         <td>
-          {{ cart.items[item].quantity }}
+          {{ item.quantity }}
         </td>
-        <td></td>
+        <td>
+          {{ item.totalPrice | currency:'USD':true }}
+        </td>
       </tr>
     </tbody>
+    <tfoot>
+      <tr>
+        <th></th>
+        <th></th>
+        <th>{{ cart.totalPrice | currency:'USD':true }}</th>
+      </tr>
+    </tfoot>
   </table>
 </ng-container>
