@@ -6,13 +6,11 @@ export class ShoppingCart {
 
   constructor(public itemsMap: { [productId: string]: ShoppingCartItem}) {
     this.itemsMap = itemsMap || {};
+   
     for (let productId in itemsMap) {
-      let item = itemsMap[productId];   // here we get shopping cart item objcet
-      let x = new ShoppingCartItem();
-      Object.assign(x, item);           // Copy all properties from Firebase "item", we use for that Objcet.assign(Target, Source)
-      x.$key = productId;
-      this.items.push(x);
-    }
+      let item = itemsMap[productId];    // here we get shopping cart item objcet
+      this.items.push(new ShoppingCartItem({ ...item, $key: productId }));  // When we apply this operator to an object (TS will iterate over all the properties of this object and add them here "...item" )
+    } 
   }
 
   getQuantity(product: Product) {                  // We are asking what is the quantity of this product
