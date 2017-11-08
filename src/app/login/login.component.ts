@@ -7,10 +7,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  constructor(private authServe: AuthService) { }
+  constructor(private authService: AuthService) { }
 
   login() {
-    this.authServe.login();
+    this.authService.login();
   }
 
 }

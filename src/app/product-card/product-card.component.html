@@ -1,4 +1,4 @@
-<div *ngIf="product.title" class="card" >       <!-- We want to render this product card here, only if we have product.title -->
+<div *ngIf="product.title" class="card">   <!-- We want to render this product card here, only if we have product.title -->
   <img *ngIf="product.imageUrl" class="card-img-top" [src]="product.imageUrl" alt="{{ product.title }}">
   <div class="card-body">
     <h4 class="card-title">{{ product.title }}</h4>
@@ -11,7 +11,7 @@
       class="btn btn-secondary btn-block">Add to Cart</button>
     <ng-template #updateQuantity>
       <app-product-quantity [product]="product" [shopping-cart]="shoppingCart">
-      </app-product-quantity>
-    </ng-template> 
+    </app-product-quantity>
+    </ng-template>
   </div>
-</div>
+</div>    

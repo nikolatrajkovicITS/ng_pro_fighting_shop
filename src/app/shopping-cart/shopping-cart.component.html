@@ -1,7 +1,8 @@
 <h1>Shopping Cart</h1>
-<div class="row col-10" *ngIf="cart$ | async as cart">   <!-- Cart$(Obrv) unwraped and store result in cart -->
+<div class="row col-10" *ngIf="cart$ | async as cart">
+  <!-- Cart$(Obrv) unwraped and store result in cart -->
   <p>
-    You have {{ cart.totalItemsCount }} items in your shopping cart. 
+    You have {{ cart.totalItemsCount }} items in your shopping cart.
   </p>
   <table class="table">
     <thead>
@@ -12,12 +13,17 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of cart.items" >   <!-- items which we iterating here are simple objects that we get from Firebase -->
+      <tr *ngFor="let item of cart.items">   <!-- items which we iterating here are simple objects that we get from Firebase -->     
+        <td>
+          <div [style.backgroundImage]="'url(' + item.imageUrl + ')'" class="thumbnail">
+          </div>
+        </td>
         <td>
           {{ item.title }}
         </td>
         <td>
-           <app-product-quantity [product]="item" [shopping-cart]="cart"></app-product-quantity>
+          <app-product-quantity [product]="item" [shopping-cart]="cart">
+          </app-product-quantity>
         </td>
         <td class="text-right">
           {{ item.totalPrice | currency:'USD':true }}
@@ -26,11 +32,12 @@
     </tbody>
     <tfoot>
       <tr>
-        <td></td>
-        <td></td>
+        <th></th>
+        <th></th>
+        <th></th>
         <th class="text-right">{{ cart.totalPrice | currency:'USD':true }}</th>
       </tr>
-    </tfoot>
+    </tfoot> 
   </table>
   <button 
     (click)="clearCart()"
