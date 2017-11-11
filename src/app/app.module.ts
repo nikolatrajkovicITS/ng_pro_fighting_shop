@@ -33,6 +33,8 @@ import { ShoppingCartService } from './shopping-cart.service';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { UserService } from './user.service';
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
+import { ShoppingCartSummaryComponent } from './shopping-cart-summary/shopping-cart-summary.component';
+import { ShippingFormComponent } from './shipping-form/shipping-form.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,9 @@ import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.componen
     ProductFilterComponent,
     ProductCardComponent,
     ProductQuantityComponent,
-    AdminOrdersComponent
+    AdminOrdersComponent,
+    ShoppingCartSummaryComponent,
+    ShippingFormComponent
   ],
   imports: [
     BrowserModule,
