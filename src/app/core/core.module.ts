@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 @NgModule({
   imports: [
     SharedModule,
+    CommonModule,
     RouterModule.forChild([])
   ],
   declarations: [
