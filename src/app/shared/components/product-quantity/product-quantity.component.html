@@ -1,15 +1,15 @@
-<div class="row no-gutters">    <!-- "no-gutters" will remove the negative margin which is automatically added -->
-  <div class="col-2">
-    <button 
-      (click)="removeFromCart()"
-      class="btn btn-secondary btn-block">-</button>
+<div class="row no-gutters"> <!-- "no-gutters" will remove the negative margin which is automatically added -->
+    <div class="col-2">
+      <button 
+        (click)="removeFromCart()"
+        class="btn btn-secondary btn-block">-</button> 
+    </div>
+    <div class="col text-center quantity">
+      {{ shoppingCart.getQuantity(product) }} in cart
+    </div>
+    <div class="col-2">
+      <button 
+        (click)="addToCart()"
+        class="btn btn-secondary btn-block">+</button> 
+    </div>
   </div>
-  <div class="col text-center">
-    {{ shoppingCart.getQuantity(product) }} in cart
-  </div>
-  <div class="col-2">
-    <button 
-      (click)="addToCart()"
-      class="btn btn-secondary btn-block">+</button>
-  </div>
-</div>

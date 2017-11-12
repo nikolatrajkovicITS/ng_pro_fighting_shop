@@ -2,3 +2,7 @@
 .dropdown-toggle {
     cursor: pointer;
 }
+
+.navbar-expand-md .navbar-nav .nav-link {
+    padding-top: 12px;
+}
