@@ -19,18 +19,18 @@
     </thead>
     <tbody>
       <tr *ngFor="let item of cart.items">
-        <td>
+        <td> 
           <div [style.backgroundImage]="'url(' + item.imageUrl + ')'" class="thumbnail">
           </div>
         </td>
-        <td>
+        <td class="shopcart-row">
           {{ item.title }}
         </td>
-        <td>
+        <td class="shopcart-row">
           <app-product-quantity [product]="item" [shopping-cart]="cart">
           </app-product-quantity>
         </td>
-        <td class="text-right">
+        <td class="text-right shopcart-row">
           {{ item.totalPrice | currency:'USD':true }}
         </td>
       </tr>

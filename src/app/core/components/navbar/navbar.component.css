@@ -6,3 +6,13 @@
 .navbar-expand-md .navbar-nav .nav-link {
     padding-top: 12px;
 }
+
+ .search-nav {
+    width: 300px;
+    line-height: 36px; 
+    height:36px;
+} 
+
+.login-label {
+    padding-top: 12px;
+}
